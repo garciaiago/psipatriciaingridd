@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     
-    // 1. Controle do Header Scrolled (Adiciona classe ao rolar a página)
+    // 1. Controle do Header Scrolled
     const header = document.querySelector(".main-header");
     window.addEventListener("scroll", function () {
         if (window.scrollY > 50) {
@@ -15,13 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const navMenu = document.getElementById("navMenu");
     const navLinks = document.querySelectorAll(".nav-menu a");
 
-    // Abrir/Fechar ao clicar no hambúrguer
     menuToggle.addEventListener("click", function () {
         menuToggle.classList.toggle("active");
         navMenu.classList.toggle("active");
     });
 
-    // Fechar o menu ao clicar em qualquer link (útil para rolagem interna)
     navLinks.forEach(link => {
         link.addEventListener("click", function () {
             menuToggle.classList.remove("active");
@@ -29,29 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 3. FAQ Accordion (Sanfona Interativa)
-    const accordionHeaders = document.querySelectorAll(".accordion-header");
-
-    accordionHeaders.forEach(header => {
-        header.addEventListener("click", function () {
-            const item = this.parentElement;
-            
-            // Verifica se o item clicado já está aberto
-            const isActive = item.classList.contains("active");
-
-            // Fecha todos os itens abertos
-            document.querySelectorAll(".accordion-item").forEach(otherItem => {
-                otherItem.classList.remove("active");
-            });
-
-            // Se o item clicado não estava ativo, abre-o
-            if (!isActive) {
-                item.classList.add("active");
-            }
-        });
-    });
-
-    // 4. Animação de Scroll Reveal (Suave e Premium)
+    // 3. Animação de Scroll Reveal
     const revealElements = document.querySelectorAll(".scroll-reveal");
 
     const revealOnScroll = function () {
@@ -59,20 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const elementTop = element.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
             
-            // Se o topo do elemento estiver a pelo menos 15% acima da parte inferior da tela
             if (elementTop < windowHeight * 0.85) {
                 element.classList.add("visible");
             }
         });
     };
 
-    // Executar uma vez no carregamento para os elementos visíveis logo de cara (Hero)
     revealOnScroll();
-
-    // Ouvir evento de scroll
     window.addEventListener("scroll", revealOnScroll);
 
-    // 5. Suporte de rolagem suave para navegadores que não suportam 'scroll-behavior: smooth' via CSS
+    // 4. Suporte de rolagem suave 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
@@ -82,8 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if (targetElement) {
                 e.preventDefault();
-                
-                // Desconto do tamanho do cabeçalho fixo (aprox. 80px)
                 const headerOffset = 80;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
